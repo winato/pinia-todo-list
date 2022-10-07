@@ -1,6 +1,6 @@
 <script setup>
-import TodoListItem from './TodoListItem.vue';
-import { useTodoListStore } from '../stores/todo-list';
+import TodoListItem from '@/components/TodoListItem.vue';
+import { useTodoListStore } from '@/stores/todo-list.js';
 import { storeToRefs } from 'pinia';
 
 const store = useTodoListStore();

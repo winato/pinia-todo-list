@@ -1,7 +1,7 @@
 <script setup>
 
-import TodoList from './TodoList.vue';
-import TodoForm from './TodoForm.vue';
+import TodoList from '@/components/TodoList.vue';
+import TodoForm from '@/components/TodoForm.vue';
 
 </script>
 

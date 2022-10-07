@@ -1,6 +1,6 @@
 <script setup>
 
-import { useTodoListStore } from '../stores/todo-list';
+import { useTodoListStore } from '@/stores/todo-list';
 
 defineProps({
   todo: Object,
@@ -20,10 +20,10 @@ const { toggleCompleted, deleteTodo } = store;
         </p>
         <div>
           <div @click="toggleCompleted(todo.id)" class="btn btn-success btn-sm me-1">
-            &#10004;
+            Done
           </div>
           <div @click.stop="deleteTodo(todo.id)" class="btn btn-danger btn-sm">
-            &#10006;
+            Remove
           </div>
         </div>
       </div>

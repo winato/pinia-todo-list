@@ -1,10 +1,16 @@
 <script setup>
-import TodoApp from './components/TodoApp.vue'
+import TodoApp from '@/components/TodoApp.vue'
 </script>
 
 <template>
   <todo-app/>
 </template>
 
-<style scoped>
+<style>
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
 </style>
