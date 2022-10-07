@@ -1,12 +1,14 @@
 import { defineStore } from "pinia";
+import axios from "axios";
 
 export const useTodoListStore = defineStore('TodoList', {
   state: () => ({
     todoList: [],
     id: 0,
+    isLoading: false,
   }),
   getters: {
-    total: () =>  this.todoList.length,
+    total: (state) =>  state.todoList.length,
   },
   actions: {
     addTodo(item) {
@@ -20,6 +22,24 @@ export const useTodoListStore = defineStore('TodoList', {
 
       if (todo) {
         todo.completed = !todo.completed;
+      }
+    },
+    async generateRandomToDos() {
+      const todoStore = useTodoListStore();
+
+      this.isLoading = true;
+
+      try {
+        const toDosUrl = 'https://jsonplaceholder.typicode.com/todos'
+        const { data } = await axios.get(toDosUrl);
+  
+        data.forEach(({ title }) => {
+          todoStore.addTodo(title);
+        });
+
+        this.isLoading = false;
+      } catch (e) {
+        this.isLoading = false;
       }
     }
   }

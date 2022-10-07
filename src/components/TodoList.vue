@@ -1,12 +1,11 @@
 <script setup>
-
+import TodoListItem from './TodoListItem.vue';
 import { useTodoListStore } from '../stores/todo-list';
 import { storeToRefs } from 'pinia';
 
 const store = useTodoListStore();
-
-const { todoList, total } = storeToRefs(store);
-const { toggleCompleted, deleteTodo } = store;
+const { generateRandomToDos } = store;
+const { todoList, total, isLoading } = storeToRefs(store);
 
 </script>
 
@@ -14,27 +13,13 @@ const { toggleCompleted, deleteTodo } = store;
   <p>
     Total: {{ total }}
   </p>
-  <ul>
-    <li v-for="todo in todoList" :key="todo.id" class="item">
-      <div class="content">
-        <span :class="{ completed: todo.completed }">
-          {{ todo.item }}
-        </span>
-        <span @click.stop="toggleCompleted(todo.id)">
-          &#10004;
-        </span>
-        <span @click.stop="deleteTodo(todo.id)" class="x">
-          &#10060;
-        </span>
-      </div>
-    </li>
+  <ul class="list-group-flush ps-0" v-if="todoList.length">
+    <TodoListItem v-for="todo in todoList" :key="todo.id" :todo="todo"/>
   </ul>
+  <div v-else @click="generateRandomToDos" class="btn btn-link btn-small">
+    Generate random list
+  </div>
+  <p v-if="isLoading && !todoList.length" class="text-center">
+    Loading...
+  </p>
 </template>
-
-<style scoped>
-
-.completed {
-  text-decoration: line-through;
-}
-
-</style>
